@@ -1,0 +1,38 @@
+{
+  "name": "ac",
+  "version": "1.0.0",
+  "description": "npm build tool tut",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "node index.js 4000",
+    "test": "mocha test -u bdd -R spec",
+    "pretest": "npm run compile",
+    "compile:coffee": "coffee --compile --output ./lib ./src/coffeescripts",
+    "compile:ts": "tsc --outDir ./lib --module commonjs ./src/typescript/typeCode.ts",
+    "compile": "npm run compile:coffee && npm run compile:ts",
+    "precompile": "npm run clean",
+    "clean": "rimraf lib/*",
+    "build:sass": "node-sass src/scss/style.scss public/css/style.css --output-style compressed",
+    "build:bundle": "browserify client/js/app.js | uglifyjs -mc > public/js/bundle.js",
+    "build:clean": "rimraf public/css/*, public/js/*",
+    "prebuild": "npm run build:clean",
+    "build": "npm run build:sass && npm run build:bundle",
+    "watch:test": "npm run test -- -w -R min"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^16.5.1",
+    "coffee-script": "^1.12.7",
+    "mocha": "^7.1.2",
+    "node-sass": "^4.14.0",
+    "rimraf": "^3.0.2",
+    "should": "^13.2.3",
+    "typescript": "^3.8.3",
+    "uglify-js": "^3.9.1"
+  },
+  "dependencies": {
+    "koa": "^2.11.0"
+  }
+}

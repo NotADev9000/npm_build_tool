@@ -1,0 +1,7 @@
+.box {
+    background-color: red;
+
+    &.inner {
+        background-color: blue;
+    }
+}
